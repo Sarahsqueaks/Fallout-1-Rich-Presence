@@ -5,6 +5,6 @@ Shows Level, Character, and length of play session.
 
 Requires PIP and Python.
 
-```pip install pypresence psutil pymem for all dependencies.```
+For all dependencies, ```pip install pypresence psutil pymem```
 
-Run the command: Python fallout_rich_presence.py, then start the game. 
+Run the command: ```Python fallout_rich_presence.py```, then start the game. 
