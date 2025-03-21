@@ -50,7 +50,7 @@ def main():
                 #Update Rich Presence with character name and level
                 rpc.update(
                     state=f"Level {level} - {character_name}",
-                    large_image="fallout1",  # Ensure you've uploaded the image in Discord Developer Portal
+                    large_image="fallout1",  #
                     large_text="Fallout 1"
                 )
             else:
