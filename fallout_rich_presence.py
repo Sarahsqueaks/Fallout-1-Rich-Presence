@@ -3,13 +3,13 @@ import psutil
 import pymem
 from pypresence import Presence
 
-CLIENT_ID = "1352438694782566504"  
+CLIENT_ID = "1352438694782566504" #client id for discord
 
-GAME_EXE = "falloutwHR.exe"  #Fallout 1 exe
-CHECK_INTERVAL = 5  # Checks every 5 seconds for game
+GAME_EXE = "falloutwHR.exe"  #fallout 1 exe
+CHECK_INTERVAL = 5  # checks every 5 seconds for game
 
-LEVEL_ADDRESS = 0x00665220  # Static memory address for the level 
-CHARACTER_NAME_ADDRESS = 0x0056BF1C  # Static memory address for the character name 
+LEVEL_ADDRESS = 0x00665220  # static address for the level 
+CHARACTER_NAME_ADDRESS = 0x0056BF1C  # static address for the character name 
 
 def is_game_running():
     """Check if Fallout 1 is running."""
@@ -20,16 +20,16 @@ def is_game_running():
 
 def get_level():
     """Get the character's level from memory."""
-    pm = pymem.Pymem(GAME_EXE)  # Attaches to the Fallout 1 process
-    level = pm.read_int(LEVEL_ADDRESS)  # Read the level as an integer from the static address
+    pm = pymem.Pymem(GAME_EXE)  # attaches to the Fallout 1 process
+    level = pm.read_int(LEVEL_ADDRESS)  #reads the address
     return level
 
 def get_character_name():
     """Get the character's name from memory."""
-    pm = pymem.Pymem(GAME_EXE)  # Attach to Fallout 1 process
+    pm = pymem.Pymem(GAME_EXE)  # attaches to Fallout 1 process
     name_bytes = pm.read_bytes(CHARACTER_NAME_ADDRESS, 64)  
     character_name = name_bytes.split(b'\x00', 1)[0]  
-    return character_name.decode('utf-8')  # Decode bytes to string
+    return character_name.decode('utf-8')  
 
 def main():
     rpc = Presence(CLIENT_ID)
@@ -43,11 +43,11 @@ def main():
                     print("Fallout 1 detected! Updating Rich Presence...")
                     game_active = True
                 
-                #Get character level and name
+                #gets character level and name
                 level = get_level()
                 character_name = get_character_name()
 
-                #Update Rich Presence with character name and level
+                #updates Rich Presence with character name and level
                 rpc.update(
                     state=f"Level {level} - {character_name}",
                     large_image="fallout1",  #
